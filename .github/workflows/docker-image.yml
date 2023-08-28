@@ -21,11 +21,38 @@ jobs:
         password: ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
       run: docker login -u $username -p $password
     
-    - name: Build the Docker image
+    - name: Build the Docker image feed
       run:  docker build -t udagram-api-feed ./udagram-api-feed
+
+    - name: Build the Docker image user
+      run:  docker build -t udagram-api-user ./udagram-api-user
       
-    - name: Build the Docker tag
+    - name: Build the Docker image frontend
+      run:  docker build -t udagram-frontend ./udagram-frontend  
+      
+    - name: Build the Docker image reverseproxy
+      run:  docker build -t reverseproxy ./udagram-reverseproxy        
+      
+    - name: Build the Docker tag feed
       run:  docker tag udagram-api-feed uyennguyen0721/udagram-api-feed:v1
       
-    - name: Docker push
+    - name: Build the Docker tag user
+      run:  docker tag udagram-api-user uyennguyen0721/udagram-api-user:v1
+      
+    - name: Build the Docker tag frontend
+      run:  docker tag udagram-frontend uyennguyen0721/udagram-frontend:v1   
+       
+    - name: Build the Docker tag reverseproxy
+      run:  docker tag reverseproxy uyennguyen0721/reverseproxy:v1 
+      
+    - name: Docker push feed
       run:  docker push uyennguyen0721/udagram-api-feed:v1
+
+    - name: Docker push user
+      run:  docker push uyennguyen0721/udagram-api-user:v1
+
+    - name: Docker push frontend
+      run:  docker push uyennguyen0721/udagram-frontend:v1
+
+    - name: Docker push reverseproxy
+      run:  docker push uyennguyen0721/reverseproxy:v1  
